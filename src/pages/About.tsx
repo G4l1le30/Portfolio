@@ -1,5 +1,5 @@
 import React from 'react';
-import { motion, Variants } from 'framer-motion';
+import { motion, type Variants } from 'framer-motion';
 
 const About: React.FC = () => {
   const containerVariants: Variants = {

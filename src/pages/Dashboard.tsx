@@ -1,6 +1,6 @@
 import React from 'react';
 import { Button } from '../components';
-import { motion, Variants } from 'framer-motion';
+import { motion, type Variants } from 'framer-motion';
 
 const Dashboard: React.FC = () => {
   const containerVariants: Variants = {

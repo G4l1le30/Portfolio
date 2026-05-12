@@ -1,6 +1,6 @@
 import React from 'react';
 import { Button, StatusChip } from '../components';
-import { motion } from 'framer-motion';
+import { motion, type Variants } from 'framer-motion';
 
 interface Project {
   id: string;

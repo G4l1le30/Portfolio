@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { StatusChip } from '../components';
-import { motion, AnimatePresence, Variants } from 'framer-motion';
+import { motion, AnimatePresence, type Variants } from 'framer-motion';
 // Import the pre-fetched data
 import localPosts from '../data/posts.json';
 
