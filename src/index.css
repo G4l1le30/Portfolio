@@ -1,0 +1,95 @@
+@import "tailwindcss";
+
+@theme {
+  --color-primary: #8ed5ff;
+  --color-secondary: #4ae176;
+  --color-tertiary: #ffbcbf;
+  --color-background: #081425;
+  --color-surface: #081425;
+  --color-surface-bright: #2f3a4c;
+  --color-surface-container: #152031;
+  --color-surface-container-low: #111c2d;
+  --color-surface-container-high: #1f2a3c;
+  --color-surface-container-highest: #2a3548;
+  --color-on-surface: #d8e3fb;
+  --color-on-surface-variant: #bdc8d1;
+  --color-outline: #87929a;
+  --color-outline-variant: #3e484f;
+  
+  --font-mono: "JetBrains Mono", monospace;
+  --font-sans: "Inter", sans-serif;
+  
+  --spacing-gutter: 24px;
+  
+  @keyframes scan {
+    from { left: -100%; }
+    to { left: 200%; }
+  }
+}
+
+@utility scan-line {
+  background: linear-gradient(to bottom, transparent 50%, rgba(142, 213, 255, 0.05) 51%, transparent 100%);
+  background-size: 100% 4px;
+  pointer-events: none;
+}
+
+@utility terminal-cursor {
+  display: inline-block;
+  width: 8px;
+  height: 1.2em;
+  background-color: #8ed5ff;
+  margin-left: 4px;
+  vertical-align: middle;
+  animation: blink 1s step-end infinite;
+}
+
+@keyframes blink {
+  from, to { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+@layer base {
+  :root {
+    background-color: #081425;
+    color: #d8e3fb;
+  }
+
+  body {
+    margin: 0;
+    font-family: var(--font-sans);
+    background-image: 
+      radial-gradient(circle at 50% 50%, rgba(142, 213, 255, 0.03) 0%, transparent 70%),
+      linear-gradient(rgba(142, 213, 255, 0.02) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(142, 213, 255, 0.02) 1px, transparent 1px);
+    background-size: 100% 100%, 40px 40px, 40px 40px;
+  }
+
+  h1, h2, h3, h4, h5, h6, .font-technical {
+    font-family: var(--font-mono);
+  }
+
+  /* Custom Scrollbar */
+  .custom-scrollbar::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+
+  .custom-scrollbar::-webkit-scrollbar-track {
+    background: #040e1f;
+  }
+
+  .custom-scrollbar::-webkit-scrollbar-thumb {
+    background: #3e484f;
+    border-radius: 0;
+  }
+
+  .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+    background: #8ed5ff;
+  }
+
+  /* Global Selection */
+  ::selection {
+    background: rgba(142, 213, 255, 0.3);
+    color: #fff;
+  }
+}
