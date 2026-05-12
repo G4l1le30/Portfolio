@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { StatusChip } from '../components';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion, AnimatePresence, Variants } from 'framer-motion';
 // Import the pre-fetched data
 import localPosts from '../data/posts.json';
 
@@ -22,7 +22,7 @@ const Articles: React.FC = () => {
     post.categories.some(cat => cat.toLowerCase().includes('cybersecurity'))
   );
 
-  const containerVariants = {
+  const containerVariants: Variants = {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
@@ -30,7 +30,7 @@ const Articles: React.FC = () => {
     }
   };
 
-  const itemVariants = {
+  const itemVariants: Variants = {
     hidden: { opacity: 0, x: -20 },
     visible: {
       opacity: 1,
