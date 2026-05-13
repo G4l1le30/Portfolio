@@ -52,12 +52,17 @@ const About: React.FC = () => {
 
         <motion.div variants={itemVariants} className="md:col-span-4 flex flex-col gap-6">
           <div className="aspect-square rounded-2xl border border-outline-variant bg-surface-container-high relative overflow-hidden group">
-                      <img src="~/Downloads/scam.png"></img>
-
-            <div className="absolute inset-0 bg-primary/10 mix-blend-overlay z-10" />
-            <span className="absolute inset-0 flex items-center justify-center material-symbols-outlined text-[120px] text-outline/10 group-hover:scale-110 transition-transform duration-700">
-              person
-            </span>
+            <img 
+            src = "/Foto1.jpeg"
+            alt = "foto of joshua"
+            className="absolute inset-0 w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700 scale-105 group-hover:scale-100"
+            onError={(e) => {
+              e.currentTarget.style.display = 'none';
+            }}
+            />
+            <div className="absolute inset-0 bg-primary/10 mix-blend-overlay z-10 pointer-events-none" />
+            {/* Fallback Icon (hanya muncul jika img error/kosong) */}
+            <span className="absolute inset-0 flex items-center justify-center material-symbols-outlined text-[120px] text-outline/10 group-hover:scale-110 transition-transform duration-700 -z-0"/>
             {/* Visual scan effect */}
             <div className="absolute inset-0 bg-gradient-to-b from-transparent via-primary/5 to-transparent h-1/2 w-full animate-scan pointer-events-none z-20" />
           </div>
@@ -73,7 +78,7 @@ const About: React.FC = () => {
             </div>
             <div className="flex justify-between items-center">
               <span className="text-outline uppercase tracking-widest">Location</span>
-              <span className="text-on-surface">US_EAST_01</span>
+              <span className="text-on-surface">AP_SOUTHEAST_3</span>
             </div>
           </div>
         </motion.div>
@@ -123,7 +128,8 @@ const About: React.FC = () => {
           {[
             { name: 'CompTIA Security+', desc: 'Network security, threats, and cryptography.', id: '98231-SEC-PLUS', year: '2022', icon: 'verified_user', color: 'text-secondary' },
             { name: 'CompTIA CySA+', desc: 'Behavioral analytics and threat identification.', id: '44102-CYSA-V2', year: '2023', icon: 'biotech', color: 'text-primary' },
-            { name: 'BTL1 (Security Blue Team)', desc: 'Hands-on practical blue team operations.', id: 'BTL1-55421', year: '2024', icon: 'shield_with_heart', color: 'text-tertiary' }
+            { name: 'BTL1 (Security Blue Team)', desc: 'Hands-on practical blue team operations.', id: 'BTL1-55421', year: '2024', icon: 'shield_with_heart', color: 'text-tertiary' },
+            { name: 'AWS Certified Cloud Practitioner (CCP)', desc: 'High-level overview of AWS services & concepts.', id: 'a22738962d8c40c7a2bdcbf33e8a99c9', year: '2026', icon: 'cloud', color: 'text-tertiary' }
           ].map((cert) => (
             <motion.div 
               key={cert.name}

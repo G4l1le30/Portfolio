@@ -11,6 +11,12 @@ const Layout: React.FC = () => {
     { path: '/articles', label: 'Articles' },
   ];
 
+  const socialLinks = [
+    { name: 'LinkedIn', href: "https://www.linkedin.com/in/joshua-hutasoit-245123304" },
+    { name: 'GitHub', href: "https://github.com/G4l1le30" },
+    { name: 'Email', href: "mailto:joshuahutasoit809@gmail.com" },
+  ];
+
   return (
     <div className="min-h-screen bg-background text-on-surface font-sans selection:bg-primary selection:text-background flex flex-col relative overflow-x-hidden">
       {/* Background Gradients from Simplified Design */}
@@ -77,18 +83,21 @@ const Layout: React.FC = () => {
       <footer className="w-full py-20 bg-surface-container-lowest/50 border-t border-outline-variant/10 relative z-10">
         <div className="max-w-7xl mx-auto px-6 md:px-16 flex flex-col md:flex-row justify-between items-center gap-12 text-center md:text-left">
           <div>
-            <div className="font-bold text-on-surface mb-3 tracking-tight text-lg">SOC_ARCHITECT</div>
+            <div className="font-bold text-on-surface mb-3 tracking-tight text-lg uppercase">SOC_ARCHITECT</div>
             <p className="text-xs text-on-surface-variant font-mono uppercase tracking-widest opacity-60">© 2024. ALL SYSTEMS NOMINAL.</p>
           </div>
+          
           <div className="flex gap-12">
-            {['LinkedIn', 'GitHub', 'Email'].map(link => (
+            {socialLinks.map(link => (
               <motion.a 
-                key={link} 
-                href="#" 
+                key={link.name} 
+                href={link.href}
+                target="_blank"
+                rel="noopener noreferrer"
                 whileHover={{ y: -2, color: 'var(--color-primary)' }}
                 className="text-[10px] font-bold uppercase tracking-[0.2em] text-on-surface-variant transition-colors"
               >
-                {link}
+                {link.name}
               </motion.a>
             ))}
           </div>
