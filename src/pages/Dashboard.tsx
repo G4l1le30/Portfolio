@@ -60,7 +60,7 @@ const Dashboard: React.FC = () => {
         
         <motion.div variants={itemVariants} className="flex flex-col sm:flex-row gap-6 justify-center md:justify-start">
           <Button variant="primary" size="lg" className="px-10 rounded-lg shadow-lg shadow-primary/20">
-            VIEW PROJECTS
+            <a href="/projects">VIEW PROJECTS</a>
           </Button>
           <Button variant="secondary" size="lg" className="px-10 rounded-lg border-outline-variant/30 text-on-surface hover:bg-surface-bright/20">
             GET IN TOUCH

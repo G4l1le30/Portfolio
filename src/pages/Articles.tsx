@@ -17,9 +17,9 @@ interface ArticleItem {
 const Articles: React.FC = () => {
   const [searchQuery, setSearchQuery] = useState('');
   
-  // Hard filter for cybersecurity tagged posts only
+  // Hard filter for blog tagged posts only
   const posts: ArticleItem[] = (localPosts as ArticleItem[]).filter(post => 
-    post.categories.some(cat => cat.toLowerCase().includes('cybersecurity'))
+    post.categories.some(cat => cat.toLowerCase().includes('blog'))
   );
 
   const containerVariants: Variants = {
