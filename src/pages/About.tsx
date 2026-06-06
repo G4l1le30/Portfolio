@@ -124,7 +124,7 @@ const About: React.FC = () => {
               src="/Foto1.webp"
               alt="Joshua Washington Hutasoit"
               loading="lazy"
-              className="absolute inset-0 w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700 scale-105 group-hover:scale-100"
+              className="absolute inset-0 w-full h-full object-cover transition-all duration-700 scale-105 group-hover:scale-100"
               onError={(e) => {
                 e.currentTarget.style.display = 'none';
               }}
