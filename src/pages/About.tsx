@@ -121,8 +121,9 @@ const About: React.FC = () => {
         <motion.div variants={itemVariants} className="md:col-span-4 flex flex-col gap-6">
           <div className="aspect-square rounded-2xl border border-outline-variant bg-surface-container-high relative overflow-hidden group shadow-xl">
             <img 
-              src="/Foto1.jpeg"
+              src="/Foto1.webp"
               alt="Joshua Washington Hutasoit"
+              loading="lazy"
               className="absolute inset-0 w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700 scale-105 group-hover:scale-100"
               onError={(e) => {
                 e.currentTarget.style.display = 'none';

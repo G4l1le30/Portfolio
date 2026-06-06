@@ -1,6 +1,15 @@
-import React, { Suspense } from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import React, { Suspense, useEffect } from 'react';
+import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import Layout from './layouts/Layout';
+
+// Scroll to top on route change
+const ScrollToTop = () => {
+  const { pathname } = useLocation();
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
+  return null;
+};
 
 // Lazy load pages
 const Dashboard = React.lazy(() => import('./pages/Dashboard'));
@@ -20,6 +29,7 @@ const LoadingSector = () => (
 function App() {
   return (
     <Router>
+      <ScrollToTop />
       <Suspense fallback={<LoadingSector />}>
         <Routes>
           <Route path="/" element={<Layout />}>
