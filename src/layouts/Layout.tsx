@@ -28,7 +28,7 @@ const Layout: React.FC = () => {
       <header className="fixed top-0 w-full z-50 bg-surface/80 backdrop-blur-md border-b border-outline-variant/10 h-20 transition-all">
         <nav className="flex justify-between items-center h-full px-6 md:px-16 max-w-7xl mx-auto w-full">
           <NavLink to="/" className="font-headline-sm text-primary tracking-tight font-bold text-xl hover:scale-105 transition-transform">
-            SOC_ARCHITECT
+            JOSHUA_HUTASOIT
           </NavLink>
           
           <div className="hidden md:flex gap-x-12 items-center">
@@ -53,26 +53,30 @@ const Layout: React.FC = () => {
           </div>
 
           <div className="flex items-center gap-4">
-            <motion.button 
+            <motion.a 
+              href="/resume.pdf"
+              download
+              target="_blank"
+              rel="noopener noreferrer"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              className="bg-primary/10 text-primary border border-primary/20 px-6 py-2 text-[10px] font-bold tracking-widest uppercase rounded-sm hover:bg-primary/20 transition-all"
+              className="bg-primary/10 text-primary border border-primary/20 px-6 py-2 text-[10px] font-bold tracking-widest uppercase rounded-sm hover:bg-primary/20 transition-all inline-block"
             >
               Resume
-            </motion.button>
+            </motion.a>
           </div>
         </nav>
       </header>
 
       {/* Main Content with Page Transitions */}
       <main className="flex-grow pt-32 pb-24 px-6 md:px-16 max-w-7xl mx-auto w-full relative z-10">
-        <AnimatePresence mode="wait">
+        <AnimatePresence mode="wait" initial={false}>
           <motion.div
             key={location.pathname}
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -10 }}
-            transition={{ duration: 0.3, ease: "easeInOut" }}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.1, ease: "linear" }}
           >
             <Outlet />
           </motion.div>
@@ -83,8 +87,8 @@ const Layout: React.FC = () => {
       <footer className="w-full py-20 bg-surface-container-lowest/50 border-t border-outline-variant/10 relative z-10">
         <div className="max-w-7xl mx-auto px-6 md:px-16 flex flex-col md:flex-row justify-between items-center gap-12 text-center md:text-left">
           <div>
-            <div className="font-bold text-on-surface mb-3 tracking-tight text-lg uppercase">SOC_ARCHITECT</div>
-            <p className="text-xs text-on-surface-variant font-mono uppercase tracking-widest opacity-60">© 2024. ALL SYSTEMS NOMINAL.</p>
+            <div className="font-bold text-on-surface mb-3 tracking-tight text-lg uppercase">JOSHUA_HUTASOIT</div>
+            <p className="text-xs text-on-surface-variant font-mono uppercase tracking-widest opacity-60">© 2026 Joshua Washington Hutasoit. ALL RIGHT RESERVED</p>
           </div>
           
           <div className="flex gap-12">

@@ -1,6 +1,7 @@
 import React from 'react';
 import { Button } from '../components';
 import { motion, type Variants } from 'framer-motion';
+import { Link } from 'react-router-dom';
 
 const Dashboard: React.FC = () => {
   const containerVariants: Variants = {
@@ -8,18 +9,18 @@ const Dashboard: React.FC = () => {
     visible: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.2,
+        staggerChildren: 0.1, // Reduced from 0.2
       },
     },
   };
 
   const itemVariants: Variants = {
-    hidden: { opacity: 0, y: 20 },
+    hidden: { opacity: 0, y: 15 }, // Smaller offset
     visible: {
       opacity: 1,
       y: 0,
       transition: {
-        duration: 0.6,
+        duration: 0.4, // Reduced from 0.6
         ease: [0.22, 1, 0.36, 1],
       },
     },
@@ -38,24 +39,24 @@ const Dashboard: React.FC = () => {
           variants={itemVariants}
           className="inline-block px-4 py-1.5 bg-primary/5 border border-primary/10 rounded-full text-[10px] font-bold tracking-[0.3em] text-primary uppercase mb-8"
         >
-          Cybersecurity Solutions Architect
+          SOC Analyst & Security Researcher
         </motion.div>
         
         <motion.h1 
           variants={itemVariants}
           className="text-4xl md:text-7xl font-sans font-bold text-on-surface mb-10 leading-[1.1] tracking-tight"
         >
-          Building resilient <br />
-          <span className="text-primary italic border-b-4 border-primary/20">security architectures</span> <br />
-          for the cloud-native era.
+          Analyzing threats and <br />
+          <span className="text-primary italic border-b-4 border-primary/20">securing architectures</span> <br />
+          for the modern defense.
         </motion.h1>
         
         <motion.p 
           variants={itemVariants}
           className="text-lg md:text-xl text-on-surface-variant max-w-2xl mb-14 leading-relaxed"
         >
-          Specializing in cloud security, automated threat detection, and infrastructure hardening. 
-          I turn complex security requirements into scalable, automated workflows that defend at speed.
+          Specializing in network defense, automated threat detection, and incident response. 
+          I leverage SIEM operations and vulnerability research to build resilient systems that defend against emerging threats.
         </motion.p>
         
         <motion.div variants={itemVariants} className="flex flex-col sm:flex-row gap-6 justify-center md:justify-start">
@@ -63,7 +64,7 @@ const Dashboard: React.FC = () => {
             <a href="/projects">VIEW PROJECTS</a>
           </Button>
           <Button variant="secondary" size="lg" className="px-10 rounded-lg border-outline-variant/30 text-on-surface hover:bg-surface-bright/20">
-            GET IN TOUCH
+            <a href="mailto:joshuahutasoit809@gmail.com">GET IN TOUCH</a>
           </Button>
         </motion.div>
       </motion.section>
@@ -88,18 +89,19 @@ const Dashboard: React.FC = () => {
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-16">
           <FeaturedCard 
-            title="Sentinel-AI"
-            category="Threat Detection"
+            title="Home Lab Deployment (Series)"
+            category="Infrastructure"
             year="2024"
-            description="Neural network-based engine for real-time zero-day vulnerability identification and automated response."
+            description="Architecting a high-availability defensive environment utilizing Proxmox, segmented VLANs, and an ELK stack for centralized log management."
             color="primary"
             index={0}
+            link="/projects/home-lab-series"
           />
           <FeaturedCard 
-            title="Iron-Vault"
-            category="Infrastructure"
-            year="2023"
-            description="Infrastructure-as-code for deploying hardened multi-cloud Kubernetes clusters with zero-trust defaults."
+            title="30-Day Cyber Challenge"
+            category="Training"
+            year="2025"
+            description="Consolidated methodology and exploit chains for various CTF machines, focusing on privilege escalation and network defense."
             color="secondary"
             index={1}
           />
@@ -116,14 +118,41 @@ const FeaturedCard: React.FC<{
   description: string;
   color: 'primary' | 'secondary';
   index: number;
-}> = ({ title, category, year, description, color, index }) => (
-  <motion.div 
-    variants={{
-      hidden: { opacity: 0, y: 30 },
-      visible: { opacity: 1, y: 0, transition: { delay: index * 0.2, duration: 0.8 } }
-    }}
-    className="group cursor-pointer"
-  >
+  link?: string;
+}> = ({ title, category, year, description, color, index, link }) => {
+  const colorMap = {
+    primary: 'text-primary',
+    secondary: 'text-secondary',
+  } as const;
+
+  return (
+    <motion.div 
+      variants={{
+        hidden: { opacity: 0, y: 15 },
+        visible: { opacity: 1, y: 0, transition: { delay: index * 0.1, duration: 0.4 } }
+      }}
+      className="group cursor-pointer"
+    >
+      {link ? (
+        <Link to={link}>
+          <CardContent title={title} category={category} year={year} description={description} color={color} colorMap={colorMap} />
+        </Link>
+      ) : (
+        <CardContent title={title} category={category} year={year} description={description} color={color} colorMap={colorMap} />
+      )}
+    </motion.div>
+  );
+};
+
+const CardContent: React.FC<{
+  title: string;
+  category: string;
+  year: string;
+  description: string;
+  color: 'primary' | 'secondary';
+  colorMap: Record<string, string>;
+}> = ({ title, category, year, description, color, colorMap }) => (
+  <>
     <div className="aspect-video mb-8 overflow-hidden rounded-2xl bg-surface-container border border-outline-variant/10 relative">
       <motion.div 
         whileHover={{ scale: 1.05 }}
@@ -132,7 +161,7 @@ const FeaturedCard: React.FC<{
       >
         <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent opacity-50" />
         <div className="absolute inset-0 flex items-center justify-center">
-          <span className={`material-symbols-outlined text-8xl opacity-10 group-hover:opacity-30 transition-all duration-700 group-hover:scale-110 text-${color}`}>
+          <span className={`material-symbols-outlined text-8xl opacity-10 group-hover:opacity-30 transition-all duration-700 group-hover:scale-110 ${colorMap[color]}`}>
             {color === 'primary' ? 'monitoring' : 'hub'}
           </span>
         </div>
@@ -141,7 +170,7 @@ const FeaturedCard: React.FC<{
     </div>
     
     <div className="flex justify-between items-center mb-4">
-      <span className={`text-[10px] font-bold tracking-[0.2em] uppercase text-${color}`}>
+      <span className={`text-[10px] font-bold tracking-[0.2em] uppercase ${colorMap[color]}`}>
         {category}
       </span>
       <span className="text-[10px] text-on-surface-variant font-mono opacity-60">
@@ -156,7 +185,7 @@ const FeaturedCard: React.FC<{
     <p className="text-on-surface-variant text-sm leading-relaxed max-w-md">
       {description}
     </p>
-  </motion.div>
+  </>
 );
 
 export default Dashboard;

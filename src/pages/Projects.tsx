@@ -1,6 +1,7 @@
 import React from 'react';
 import { Button, StatusChip } from '../components';
 import { motion, type Variants } from 'framer-motion';
+import { Link } from 'react-router-dom';
 
 interface Project {
   id: string;
@@ -10,17 +11,20 @@ interface Project {
   status: string;
   statusVariant: 'success' | 'error' | 'info' | 'warning';
   category: string;
+  hidden?: boolean;
+  link?: string;
 }
 
 const PROJECTS: Project[] = [
   {
     id: 'LAB-01',
-    title: 'Home Lab Deployment',
+    title: 'Home Lab Deployment (Series)',
     category: 'Infrastructure',
     description: 'Architecting a high-availability defensive environment utilizing Proxmox, segmented VLANs, and an ELK stack for centralized log management.',
     tags: ['PFSense', 'Proxmox', 'Suricata'],
     status: 'ACTIVE',
     statusVariant: 'success',
+    link: '/projects/home-lab-series',
   },
   {
     id: 'SIM-04',
@@ -30,6 +34,7 @@ const PROJECTS: Project[] = [
     tags: ['Snort', 'Wireshark', 'Volatility'],
     status: 'CRITICAL',
     statusVariant: 'error',
+    hidden: true,
   },
   {
     id: 'CTF-09',
@@ -48,6 +53,7 @@ const PROJECTS: Project[] = [
     tags: ['BeyondCorp', 'Identity-Aware-Proxy', 'GCP'],
     status: 'STABLE',
     statusVariant: 'success',
+    hidden: true,
   },
   {
     id: 'FOR-03',
@@ -57,6 +63,7 @@ const PROJECTS: Project[] = [
     tags: ['Python', 'Forensics', 'Volatility-3'],
     status: 'DEV_MODE',
     statusVariant: 'warning',
+    hidden: true,
   },
   {
     id: 'CLD-05',
@@ -66,10 +73,13 @@ const PROJECTS: Project[] = [
     tags: ['AWS', 'Lambda', 'Terraform'],
     status: 'COMPLIANT',
     statusVariant: 'success',
+    hidden: true,
   },
 ];
 
 const Projects: React.FC = () => {
+  const displayedProjects = PROJECTS.filter(p => !p.hidden);
+  
   const containerVariants: Variants = {
     hidden: { opacity: 0 },
     visible: {
@@ -79,11 +89,11 @@ const Projects: React.FC = () => {
   };
 
   const itemVariants: Variants = {
-    hidden: { opacity: 0, y: 30 },
+    hidden: { opacity: 0, y: 15 },
     visible: {
       opacity: 1,
       y: 0,
-      transition: { duration: 0.8, ease: [0.22, 1, 0.36, 1] }
+      transition: { duration: 0.4, ease: [0.22, 1, 0.36, 1] }
     }
   };
 
@@ -116,7 +126,7 @@ const Projects: React.FC = () => {
         variants={containerVariants}
         className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-16"
       >
-        {PROJECTS.map((project, i) => (
+        {displayedProjects.map((project, i) => (
           <motion.div 
             key={project.id}
             variants={itemVariants}
@@ -134,7 +144,8 @@ const Projects: React.FC = () => {
                     {['database', 'security', 'terminal', 'hub', 'biotech', 'cloud'][i % 6]}
                   </span>
                 </div>
-                <div className="w-full h-full bg-surface-bright/10 backdrop-blur-[2px] group-hover:backdrop-blur-0 transition-all duration-700" />
+                {/* Replaced backdrop-blur with simple opacity transition */}
+                <div className="absolute inset-0 bg-surface-bright/10 opacity-100 group-hover:opacity-0 transition-opacity duration-700" />
               </motion.div>
               
               <div className="absolute top-4 right-4 px-2 py-1 bg-background/80 backdrop-blur-md border border-outline-variant/30 rounded font-mono text-[9px] text-primary tracking-tighter">
@@ -169,17 +180,68 @@ const Projects: React.FC = () => {
                 ))}
               </div>
 
-              <Button 
-                variant="ghost" 
-                className="w-full justify-between group/btn border border-outline-variant/20 hover:border-primary/40 rounded-xl" 
-                icon="arrow_forward"
-              >
-                EXPLORE_REPORT
-              </Button>
+              {project.link ? (
+                <Link to={project.link}>
+                  <Button 
+                    variant="ghost" 
+                    className="w-full justify-between group/btn border border-outline-variant/20 hover:border-primary/40 rounded-xl" 
+                    icon="arrow_forward"
+                  >
+                    EXPLORE_REPORT
+                  </Button>
+                </Link>
+              ) : (
+                <Button 
+                  variant="ghost" 
+                  className="w-full justify-between group/btn border border-outline-variant/20 hover:border-primary/40 rounded-xl" 
+                  icon="arrow_forward"
+                >
+                  EXPLORE_REPORT
+                </Button>
+              )}
             </div>
           </motion.div>
         ))}
       </motion.div>
+
+      {/* Blog Section */}
+      <motion.section
+        variants={itemVariants}
+        whileInView="visible"
+        viewport={{ once: true }}
+        className="max-w-3xl"
+      >
+        <div className="flex items-center gap-4 mb-12">
+          <h2 className="text-xl font-bold text-primary tracking-[0.2em] uppercase">Security Blog</h2>
+          <div className="flex-grow h-px bg-outline-variant/20"></div>
+        </div>
+
+        <motion.a
+          href="https://30-day-cyber-challenge.blogspot.com/"
+          target="_blank"
+          rel="noopener noreferrer"
+          whileHover={{ x: 8 }}
+          className="block p-8 bg-surface-container border border-outline-variant/30 rounded-2xl hover:border-primary/40 transition-all group"
+        >
+          <div className="flex gap-6 items-center">
+            <div className="w-14 h-14 rounded-full border-2 border-outline-variant/30 flex items-center justify-center text-primary shrink-0">
+              <span className="material-symbols-outlined text-3xl">travel_explore</span>
+            </div>
+            <div className="flex-grow">
+              <h3 className="text-xl font-bold text-on-surface group-hover:text-primary transition-colors flex items-center gap-2">
+                30-Day Cyber Challenge
+                <span className="material-symbols-outlined text-base opacity-0 group-hover:opacity-100 transition-all">open_in_new</span>
+              </h3>
+              <p className="text-on-surface-variant font-sans mt-1">
+                CTF write-ups, security research, and hands-on cyber labs from the 30-Day IDN Bootcamp Challenge.
+              </p>
+              <span className="inline-block mt-3 text-xs font-mono text-primary tracking-wider uppercase">
+                30-day-cyber-challenge.blogspot.com →
+              </span>
+            </div>
+          </div>
+        </motion.a>
+      </motion.section>
     </motion.div>
   );
 };

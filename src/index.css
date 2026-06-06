@@ -22,8 +22,8 @@
   --spacing-gutter: 24px;
   
   @keyframes scan {
-    from { left: -100%; }
-    to { left: 200%; }
+    from { transform: translateY(-100%); }
+    to { transform: translateY(200%); }
   }
 }
 
@@ -31,6 +31,7 @@
   background: linear-gradient(to bottom, transparent 50%, rgba(142, 213, 255, 0.05) 51%, transparent 100%);
   background-size: 100% 4px;
   pointer-events: none;
+  transform: translateZ(0); /* Force GPU acceleration */
 }
 
 @utility terminal-cursor {
