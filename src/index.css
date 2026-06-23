@@ -1,9 +1,9 @@
 @import "tailwindcss";
 
 @theme {
-  --color-primary: #AFACA1; /* Accent */
-  --color-secondary: #BDBBB2;
-  --color-tertiary: #C9C8BF;
+  --color-primary: #ECEAE2; /* Bright accent for active items/buttons */
+  --color-secondary: #C9C8BF;
+  --color-tertiary: #AFACA1;
   --color-background: #141413; /* BG */
   --color-surface: #141413;
   --color-surface-bright: #1c1c1b;
@@ -11,9 +11,9 @@
   --color-surface-container-low: #171716;
   --color-surface-container-high: #1c1c1b;
   --color-surface-container-highest: #212120;
-  --color-on-surface: #C9C8BF; /* Text Primary */
-  --color-on-surface-variant: #BDBBB2; /* Text Secondary */
-  --color-outline: #AFACA1;
+  --color-on-surface: #ECEAE2; /* Heading / Text Primary */
+  --color-on-surface-variant: #C9C8BF; /* Body Text / Text Secondary */
+  --color-outline: #AFACA1; /* Meta Text / Text Muted */
   --color-outline-variant: #2a2a29;
   
   --font-mono: "JetBrains Mono", monospace;
