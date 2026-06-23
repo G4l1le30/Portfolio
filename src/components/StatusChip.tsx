@@ -7,10 +7,10 @@ interface StatusChipProps {
 
 const StatusChip: React.FC<StatusChipProps> = ({ label, variant = 'info' }) => {
   const styles = {
-    success: "border-secondary text-secondary bg-secondary/5",
-    error: "border-tertiary text-tertiary bg-tertiary/5",
-    info: "border-primary text-primary bg-primary/5",
-    warning: "border-yellow-500 text-yellow-500 bg-yellow-500/5",
+    success: "border-primary/40 text-primary bg-primary/5",
+    error: "border-outline/40 text-outline bg-outline/5",
+    info: "border-on-surface-variant/40 text-on-surface-variant bg-on-surface-variant/5",
+    warning: "border-secondary/40 text-secondary bg-secondary/5",
   };
 
   return (

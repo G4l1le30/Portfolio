@@ -18,14 +18,11 @@ const Layout: React.FC = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-background text-on-surface font-sans selection:bg-primary selection:text-background flex flex-col relative overflow-x-hidden">
-      {/* Background Gradients from Simplified Design */}
-      <div className="fixed inset-0 pointer-events-none z-0">
-        <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(circle_at_10%_20%,rgba(142,213,255,0.03)_0%,transparent_40%),radial-gradient(circle_at_90%_80%,rgba(74,225,118,0.02)_0%,transparent_40%)]" />
-      </div>
-
+    <div className="min-h-screen bg-background text-on-surface font-sans selection:bg-primary/20 selection:text-primary flex flex-col relative overflow-x-hidden">
+      {/* Background Gradients removed for Minimal Luxury */}
+      
       {/* Modern Header */}
-      <header className="fixed top-0 w-full z-50 bg-surface/80 backdrop-blur-md border-b border-outline-variant/10 h-20 transition-all">
+      <header className="fixed top-0 w-full z-50 bg-background/90 backdrop-blur-md border-b border-outline-variant/50 h-20 transition-all">
         <nav className="flex justify-between items-center h-full px-6 md:px-16 max-w-7xl mx-auto w-full">
           <NavLink to="/" className="font-headline-sm text-primary tracking-tight font-bold text-xl hover:scale-105 transition-transform">
             JOSHUA_HUTASOIT

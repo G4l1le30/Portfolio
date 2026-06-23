@@ -20,44 +20,27 @@ interface Project {
 
 const HomeLabThumbnail: React.FC = () => {
   return (
-    <div className="absolute inset-0 w-full h-full bg-[#0b1326] overflow-hidden flex flex-col items-center justify-center select-none font-mono">
-      {/* Background Dot Grid */}
-      <div 
-        className="absolute inset-0 opacity-40 pointer-events-none" 
-        style={{
-          backgroundImage: 'radial-gradient(rgba(137, 206, 255, 0.15) 1px, transparent 1px)',
-          backgroundSize: '32px 32px'
-        }}
-      />
-      
-      {/* Decorative Cyber Crosshairs */}
+    <div className="absolute inset-0 w-full h-full bg-background overflow-hidden flex flex-col items-center justify-center select-none font-mono">
+      {/* Decorative Cyber Crosshairs (Muted) */}
       <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute top-1/2 left-0 w-full h-[1px] bg-[#89ceff]/5" />
-        <div className="absolute top-0 left-1/2 w-[1px] h-full bg-[#89ceff]/5" />
+        <div className="absolute top-1/2 left-0 w-full h-[1px] bg-primary/5" />
+        <div className="absolute top-0 left-1/2 w-[1px] h-full bg-primary/5" />
       </div>
 
       {/* Content */}
       <div className="relative z-10 flex flex-col items-center justify-center space-y-6 text-center">
-        
-
-        {/* Glitch Headline */}
         <div className="relative group/glitch">
-          <h1 
-            className="text-4xl md:text-5xl font-black text-[#dae2fd] tracking-tighter leading-none italic uppercase relative"
-            style={{
-              textShadow: '0.05em 0 0 rgba(255,0,193,0.75), -0.025em -0.05em 0 rgba(0,255,249,0.75)'
-            }}
-          >
+          <h1 className="text-4xl md:text-5xl font-black text-primary tracking-tighter leading-none italic uppercase relative">
             HOME LAB
           </h1>
         </div>
       </div>
 
       {/* Corner Accents */}
-      <div className="absolute top-4 left-4 w-10 h-10 border-t border-l border-[#89ceff]/20" />
-      <div className="absolute top-4 right-4 w-10 h-10 border-t border-r border-[#89ceff]/20" />
-      <div className="absolute bottom-4 left-4 w-10 h-10 border-b border-l border-[#89ceff]/20" />
-      <div className="absolute bottom-4 right-4 w-10 h-10 border-b border-r border-[#89ceff]/20" />
+      <div className="absolute top-4 left-4 w-10 h-10 border-t border-l border-primary/20" />
+      <div className="absolute top-4 right-4 w-10 h-10 border-t border-r border-primary/20" />
+      <div className="absolute bottom-4 left-4 w-10 h-10 border-b border-l border-primary/20" />
+      <div className="absolute bottom-4 right-4 w-10 h-10 border-b border-r border-primary/20" />
     </div>
   );
 };

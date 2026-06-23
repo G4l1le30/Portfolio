@@ -1,37 +1,24 @@
-import React, { useEffect, useState, useMemo } from 'react';
+import React from 'react';
 import { motion, type Variants } from 'framer-motion';
 
 // --- Animated glitch text ---
 const GlitchText: React.FC<{ text: string; className?: string }> = ({ text, className = '' }) => {
-  const [glitching, setGlitching] = useState(false);
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setGlitching(true);
-      setTimeout(() => setGlitching(false), 150);
-    }, 15000 + Math.random() * 5000); // Extremely infrequent
-    return () => clearInterval(interval);
-  }, []);
   return (
-    <span className={`${className} ${glitching ? 'text-primary' : ''} relative inline-block transition-colors duration-200`}>
+    <span className={`${className} relative inline-block transition-colors duration-200`}>
       {text}
-      {glitching && (
-        <span className="absolute inset-0 animate-pulse bg-primary/5 -z-10" />
-      )}
     </span>
   );
 };
 
 // --- Section header with memoized tag ---
 const SectionHeader: React.FC<{ title: string }> = ({ title }) => {
-  const tag = useMemo(() => String(Math.floor(Math.random() * 900) + 100).padStart(4, '0'), []);
   return (
     <div className="flex items-center gap-4 mb-12">
       <h2 className="text-xl font-bold text-primary tracking-[0.2em] uppercase whitespace-nowrap flex items-center gap-3">
-        <span className="w-1.5 h-1.5 bg-primary/40 rounded-full animate-pulse" />
+        <span className="w-1.5 h-1.5 bg-primary/40 rounded-full" />
         {title}
       </h2>
       <div className="flex-grow h-px bg-outline-variant/20"></div>
-      <span className="font-mono text-[10px] text-outline opacity-40">[{tag}]</span>
     </div>
   );
 };

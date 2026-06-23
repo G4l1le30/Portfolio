@@ -29,19 +29,11 @@ const Button: React.FC<ButtonProps> = ({
     lg: "px-8 py-4 text-base",
   };
 
-  // Scanning animation bar
-  const ScanEffect = () => (
-    <div className="absolute inset-0 w-full h-full pointer-events-none overflow-hidden">
-      <div className="absolute top-0 -left-[100%] w-[50%] h-full bg-white/20 skew-x-[-25deg] group-hover:animate-scan" />
-    </div>
-  );
-
   return (
     <button 
       className={`${baseStyles} ${variants[variant]} ${sizes[size]} ${className}`}
       {...props}
     >
-      <ScanEffect />
       {icon && <span className="material-symbols-outlined mr-2 text-[1.2em]">{icon}</span>}
       <span className="relative z-10 uppercase tracking-wider">{children}</span>
     </button>

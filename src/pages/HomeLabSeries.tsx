@@ -5,51 +5,37 @@ import { Button } from '../components';
 
 const HomeLabBanner: React.FC<{ mousePos: { x: number; y: number } }> = ({ mousePos }) => {
   return (
-    <div className="absolute inset-0 w-full h-full bg-[#0b1326] overflow-hidden flex flex-col items-center justify-center select-none font-mono">
-      {/* Background Dot Grid */}
-      <div 
-        className="absolute inset-0 opacity-40 pointer-events-none" 
-        style={{
-          backgroundImage: 'radial-gradient(rgba(137, 206, 255, 0.15) 1px, transparent 1px)',
-          backgroundSize: '32px 32px'
-        }}
-      />
-      
+    <div className="absolute inset-0 w-full h-full bg-background overflow-hidden flex flex-col items-center justify-center select-none font-mono">
       {/* Decorative Cyber Crosshairs */}
       <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute top-1/2 left-0 w-full h-[1px] bg-[#89ceff]/5" />
-        <div className="absolute top-0 left-1/2 w-[1px] h-full bg-[#89ceff]/5" />
+        <div className="absolute top-1/2 left-0 w-full h-[1px] bg-primary/5" />
+        <div className="absolute top-0 left-1/2 w-[1px] h-full bg-primary/5" />
       </div>
 
       {/* Content */}
       <div className="relative z-10 flex flex-col items-center justify-center space-y-8 text-center p-6">
         {/* Status Indicator */}
-        <div className="flex items-center gap-2 bg-[#1f2a3c] px-4 py-1.5 rounded border border-[#4ae176]/20 shadow-[0_0_20px_rgba(74,225,118,0.15)]">
-          <span className="w-2.5 h-2.5 rounded-full bg-[#4ae176] animate-pulse" />
-          <span className="text-xs font-bold text-[#4ae176] tracking-widest uppercase">system_online</span>
+        <div className="flex items-center gap-2 bg-surface-container px-4 py-1.5 rounded border border-primary/20">
+          <span className="w-2.5 h-2.5 rounded-full bg-primary animate-pulse" />
+          <span className="text-xs font-bold text-primary tracking-widest uppercase">system_online</span>
         </div>
 
-        {/* Glitch Headline with Mouse Parallax */}
+        {/* Headline with Mouse Parallax */}
         <div 
           className="relative transition-transform duration-200 ease-out"
           style={{ transform: `translate(${mousePos.x}px, ${mousePos.y}px)` }}
         >
-          <h1 
-            className="text-6xl md:text-8xl font-black text-[#dae2fd] tracking-tighter leading-none italic uppercase relative"
-            style={{
-              textShadow: '0.05em 0 0 rgba(255,0,193,0.75), -0.025em -0.05em 0 rgba(0,255,249,0.75)'
-            }}
-          >
+          <h1 className="text-6xl md:text-8xl font-black text-primary tracking-tighter leading-none italic uppercase relative">
             HOME LAB
           </h1>
         </div>
       </div>
 
       {/* Corner Accents */}
-      <div className="absolute top-6 left-6 w-16 h-16 border-t-2 border-l-2 border-[#89ceff]/20" />
-      <div className="absolute top-6 right-6 w-16 h-16 border-t-2 border-r-2 border-[#89ceff]/20" />
-      <div className="absolute bottom-6 left-6 w-16 h-16 border-b-2 border-l-2 border-[#89ceff]/20" />
-      <div className="absolute bottom-6 right-6 w-16 h-16 border-b-2 border-r-2 border-[#89ceff]/20" />
+      <div className="absolute top-6 left-6 w-16 h-16 border-t-2 border-l-2 border-primary/20" />
+      <div className="absolute top-6 right-6 w-16 h-16 border-t-2 border-r-2 border-primary/20" />
+      <div className="absolute bottom-6 left-6 w-16 h-16 border-b-2 border-l-2 border-primary/20" />
+      <div className="absolute bottom-6 right-6 w-16 h-16 border-b-2 border-r-2 border-primary/20" />
     </div>
   );
 };

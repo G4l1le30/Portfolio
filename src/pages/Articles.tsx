@@ -56,7 +56,7 @@ const Articles: React.FC = () => {
         month: '2-digit',
         day: '2-digit'
       }).replace(/\//g, '.');
-    } catch (e) {
+    } catch {
       return dateStr;
     }
   };
