@@ -34,7 +34,7 @@ const Layout: React.FC = () => {
                 key={item.path}
                 to={item.path}
                 className={({ isActive }) => `
-                  text-[10px] uppercase tracking-[0.3em] font-bold transition-all relative group
+                  text-[11px] uppercase tracking-[0.2em] font-bold transition-all relative group
                   ${isActive ? 'text-primary' : 'text-on-surface-variant hover:text-primary'}
                 `}
               >
@@ -85,7 +85,7 @@ const Layout: React.FC = () => {
         <div className="max-w-7xl mx-auto px-6 md:px-16 flex flex-col md:flex-row justify-between items-center gap-12 text-center md:text-left">
           <div>
             <div className="font-bold text-on-surface mb-3 tracking-tight text-lg uppercase">JOSHUA_HUTASOIT</div>
-            <p className="text-xs text-on-surface-variant font-mono uppercase tracking-widest opacity-60">© 2026 Joshua Washington Hutasoit. ALL RIGHT RESERVED</p>
+            <p className="text-xs text-on-surface-variant font-mono uppercase tracking-widest">© 2026 Joshua Washington Hutasoit. ALL RIGHT RESERVED</p>
           </div>
           
           <div className="flex gap-12">
@@ -96,7 +96,7 @@ const Layout: React.FC = () => {
                 target="_blank"
                 rel="noopener noreferrer"
                 whileHover={{ y: -2, color: 'var(--color-primary)' }}
-                className="text-[10px] font-bold uppercase tracking-[0.2em] text-on-surface-variant transition-colors"
+                className="text-xs font-bold uppercase tracking-[0.2em] text-on-surface-variant transition-colors"
               >
                 {link.name}
               </motion.a>

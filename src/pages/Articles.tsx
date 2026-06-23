@@ -86,7 +86,7 @@ const Articles: React.FC = () => {
               setSearchQuery(e.target.value);
               setVisibleCount(6); // Reset pagination on search
             }}
-            className="w-full bg-transparent border-b-2 border-outline-variant/30 py-4 font-mono text-xl text-on-surface placeholder:text-outline-variant outline-none focus:border-primary transition-all uppercase"
+            className="w-full bg-transparent border-b-2 border-outline-variant/30 py-4 font-mono text-xl text-on-surface placeholder:text-outline/70 outline-none focus:border-primary transition-all uppercase"
             placeholder="> QUERY SYSTEM LOGS..."
           />
           <motion.div 
@@ -148,7 +148,7 @@ const Articles: React.FC = () => {
                 <motion.button
                   variants={itemVariants}
                   onClick={() => setVisibleCount(prev => prev + 6)}
-                  className="mt-8 py-4 border border-outline-variant/30 font-mono text-[10px] font-bold text-primary uppercase tracking-[0.3em] hover:bg-primary/5 transition-all w-full flex items-center justify-center gap-2 rounded-lg"
+                  className="mt-8 py-4 border border-outline-variant/30 font-mono text-xs font-bold text-primary uppercase tracking-[0.2em] hover:bg-primary/5 transition-all w-full flex items-center justify-center gap-2 rounded-lg"
                 >
                   <span className="material-symbols-outlined text-sm">expand_more</span>
                   Load_More_Entries
@@ -169,7 +169,7 @@ const Articles: React.FC = () => {
         </AnimatePresence>
       </section>
 
-      <motion.div variants={itemVariants} className="mt-24 pt-12 border-t border-outline-variant/10 flex items-center justify-between font-mono text-[10px] text-outline opacity-40 uppercase">
+      <motion.div variants={itemVariants} className="mt-24 pt-12 border-t border-outline-variant/10 flex items-center justify-between font-mono text-[11px] text-outline opacity-80 uppercase">
         <span>Source: PRE_FETCHED_JSON</span>
         <span className="text-secondary tracking-widest">Database_Ready</span>
       </motion.div>

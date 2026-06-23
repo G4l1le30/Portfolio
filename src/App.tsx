@@ -23,7 +23,7 @@ const OctoSight = React.lazy(() => import('./pages/OctoSight'));
 const LoadingSector = () => (
   <div className="min-h-[60vh] flex flex-col items-center justify-center gap-4">
     <div className="w-12 h-12 border-2 border-primary/20 border-t-primary rounded-full animate-spin" />
-    <span className="font-mono text-[10px] text-primary animate-pulse uppercase tracking-[0.3em]">Decrypting_Sector...</span>
+    <span className="font-mono text-xs text-primary animate-pulse uppercase tracking-[0.2em]">Decrypting_Sector...</span>
   </div>
 );
 

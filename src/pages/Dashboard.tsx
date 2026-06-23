@@ -37,7 +37,7 @@ const Dashboard: React.FC = () => {
       <motion.section variants={itemVariants} className="py-12 md:py-24 text-center md:text-left max-w-5xl">
         <motion.div 
           variants={itemVariants}
-          className="inline-block px-4 py-1.5 bg-primary/5 border border-primary/10 rounded-full text-[10px] font-bold tracking-[0.3em] text-primary uppercase mb-8"
+          className="inline-block px-4 py-1.5 bg-primary/5 border border-primary/10 rounded-full text-xs font-bold tracking-[0.2em] text-primary uppercase mb-8"
         >
           SOC Analyst & Security Researcher
         </motion.div>

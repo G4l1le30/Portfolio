@@ -34,10 +34,10 @@ const SkillBar: React.FC<{ name: string; icon: string; level: string }> = ({ nam
     <div className="p-4 bg-surface-container/30 border border-outline-variant/20 rounded-xl flex flex-col gap-3 group hover:border-primary/30 transition-colors">
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-3">
-          <span className="material-symbols-outlined text-xl text-primary/70 group-hover:text-primary transition-colors">{icon}</span>
-          <span className="font-mono text-xs font-bold text-on-surface-variant group-hover:text-on-surface uppercase tracking-wider">{name}</span>
+          <span className="material-symbols-outlined text-2xl text-primary/70 group-hover:text-primary transition-colors">{icon}</span>
+          <span className="font-mono text-sm font-bold text-on-surface-variant group-hover:text-on-surface uppercase tracking-wider">{name}</span>
         </div>
-        <span className="font-mono text-[9px] text-outline uppercase tracking-tighter opacity-60 group-hover:opacity-100 transition-opacity">{level}</span>
+        <span className="font-mono text-xs text-outline uppercase tracking-wider group-hover:text-primary transition-colors">{level}</span>
       </div>
       <div className="h-1 bg-outline-variant/10 rounded-full overflow-hidden">
         <motion.div 
@@ -82,7 +82,7 @@ const About: React.FC = () => {
         <motion.div variants={itemVariants} className="md:col-span-8">
           <div className="inline-flex items-center gap-2 mb-6">
             <span className="w-2 h-2 rounded-full bg-primary/60"></span>
-            <span className="font-mono text-[10px] font-bold text-primary uppercase tracking-[0.3em]">Personnel_Dossier</span>
+            <span className="font-mono text-xs font-bold text-primary uppercase tracking-[0.2em]">Personnel_Dossier</span>
           </div>
           
           <h1 className="text-4xl md:text-6xl font-bold text-on-surface mb-8 tracking-tight leading-tight">
@@ -213,7 +213,7 @@ const About: React.FC = () => {
             },
           ].map((cat) => (
             <div key={cat.category} className="space-y-6">
-              <h3 className="font-mono text-[10px] font-bold text-outline uppercase tracking-[0.3em] flex items-center gap-2">
+              <h3 className="font-mono text-xs font-bold text-outline uppercase tracking-[0.2em] flex items-center gap-2">
                 <span className="w-1 h-1 bg-outline/50 rounded-full" />
                 {cat.category}
               </h3>
@@ -305,8 +305,8 @@ const About: React.FC = () => {
                 </div>
               </div>
               <div className="mt-4 md:mt-0 text-left md:text-right font-mono shrink-0">
-                <span className="block text-[10px] text-outline tracking-wider uppercase mb-1">{cert.id}</span>
-                <span className={`text-xs font-bold ${cert.color}`}>{cert.year}</span>
+                <span className="block text-xs text-outline tracking-wider uppercase mb-1">{cert.id}</span>
+                <span className={`text-sm font-bold ${cert.color}`}>{cert.year}</span>
               </div>
             </motion.div>
           ))}
@@ -370,7 +370,7 @@ const About: React.FC = () => {
                   <p className="text-sm text-on-surface-variant font-sans mt-2 leading-relaxed max-w-xl">
                     {exp.desc}
                   </p>
-                  <span className="inline-block mt-4 text-[10px] font-mono text-outline tracking-wider uppercase opacity-60">
+                  <span className="inline-block mt-4 text-xs font-mono text-outline tracking-wider uppercase">
                     {exp.location} — {exp.period}
                   </span>
                 </div>
