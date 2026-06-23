@@ -13,7 +13,54 @@ interface Project {
   category: string;
   hidden?: boolean;
   link?: string;
+  github?: string;
+  demo?: string;
+  image?: string;
 }
+
+const HomeLabThumbnail: React.FC = () => {
+  return (
+    <div className="absolute inset-0 w-full h-full bg-[#0b1326] overflow-hidden flex flex-col items-center justify-center select-none font-mono">
+      {/* Background Dot Grid */}
+      <div 
+        className="absolute inset-0 opacity-40 pointer-events-none" 
+        style={{
+          backgroundImage: 'radial-gradient(rgba(137, 206, 255, 0.15) 1px, transparent 1px)',
+          backgroundSize: '32px 32px'
+        }}
+      />
+      
+      {/* Decorative Cyber Crosshairs */}
+      <div className="absolute inset-0 pointer-events-none">
+        <div className="absolute top-1/2 left-0 w-full h-[1px] bg-[#89ceff]/5" />
+        <div className="absolute top-0 left-1/2 w-[1px] h-full bg-[#89ceff]/5" />
+      </div>
+
+      {/* Content */}
+      <div className="relative z-10 flex flex-col items-center justify-center space-y-6 text-center">
+        
+
+        {/* Glitch Headline */}
+        <div className="relative group/glitch">
+          <h1 
+            className="text-4xl md:text-5xl font-black text-[#dae2fd] tracking-tighter leading-none italic uppercase relative"
+            style={{
+              textShadow: '0.05em 0 0 rgba(255,0,193,0.75), -0.025em -0.05em 0 rgba(0,255,249,0.75)'
+            }}
+          >
+            HOME LAB
+          </h1>
+        </div>
+      </div>
+
+      {/* Corner Accents */}
+      <div className="absolute top-4 left-4 w-10 h-10 border-t border-l border-[#89ceff]/20" />
+      <div className="absolute top-4 right-4 w-10 h-10 border-t border-r border-[#89ceff]/20" />
+      <div className="absolute bottom-4 left-4 w-10 h-10 border-b border-l border-[#89ceff]/20" />
+      <div className="absolute bottom-4 right-4 w-10 h-10 border-b border-r border-[#89ceff]/20" />
+    </div>
+  );
+};
 
 const PROJECTS: Project[] = [
   {
@@ -25,6 +72,18 @@ const PROJECTS: Project[] = [
     status: 'ACTIVE',
     statusVariant: 'success',
     link: '/projects/home-lab-series',
+    image: '/homelab.webp',
+  },
+  {
+    id: 'CAP-01',
+    title: 'OctoSight: Anti-Phishing System',
+    category: 'Capstone',
+    description: 'An end-to-end anti-phishing and fraud detection platform for digital banking, combining rule-based heuristics (35%) and machine learning (65%) with OCR screenshot triage.',
+    tags: ['FastAPI', 'NextJS', 'TypeScript', 'Docker'],
+    status: 'STABLE',
+    statusVariant: 'success',
+    link: '/projects/octosight',
+    image: '/octosight.webp',
   },
   {
     id: 'SIM-04',
@@ -138,12 +197,24 @@ const Projects: React.FC = () => {
                 transition={{ duration: 0.6 }}
                 className="absolute inset-0"
               >
-                <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent opacity-50" />
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <span className="material-symbols-outlined text-8xl opacity-10 group-hover:opacity-25 transition-all duration-700">
-                    {['database', 'security', 'terminal', 'hub', 'biotech', 'cloud'][i % 6]}
-                  </span>
-                </div>
+                {project.id === 'LAB-01' ? (
+                  <HomeLabThumbnail />
+                ) : project.image ? (
+                  <img 
+                    src={project.image} 
+                    alt={project.title} 
+                    className="w-full h-full object-cover"
+                  />
+                ) : (
+                  <>
+                    <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent opacity-50" />
+                    <div className="absolute inset-0 flex items-center justify-center">
+                      <span className="material-symbols-outlined text-8xl opacity-10 group-hover:opacity-25 transition-all duration-700">
+                        {['database', 'security', 'terminal', 'hub', 'biotech', 'cloud'][i % 6]}
+                      </span>
+                    </div>
+                  </>
+                )}
                 {/* Replaced backdrop-blur with simple opacity transition */}
                 <div className="absolute inset-0 bg-surface-bright/10 opacity-100 group-hover:opacity-0 transition-opacity duration-700" />
               </motion.div>
@@ -180,16 +251,68 @@ const Projects: React.FC = () => {
                 ))}
               </div>
 
-              {project.link ? (
-                <Link to={project.link}>
-                  <Button 
-                    variant="ghost" 
-                    className="w-full justify-between group/btn border border-outline-variant/20 hover:border-primary/40 rounded-xl" 
-                    icon="arrow_forward"
+              {project.github || project.demo ? (
+                <div className="flex gap-4 w-full">
+                  {project.github && (
+                    <a 
+                      href={project.github} 
+                      target="_blank" 
+                      rel="noopener noreferrer" 
+                      className="flex-1"
+                    >
+                      <Button 
+                        variant="ghost" 
+                        className="w-full justify-center border border-outline-variant/20 hover:border-primary/40 rounded-xl" 
+                        icon="code"
+                      >
+                        Code
+                      </Button>
+                    </a>
+                  )}
+                  {project.demo && (
+                    <a 
+                      href={project.demo} 
+                      target="_blank" 
+                      rel="noopener noreferrer" 
+                      className="flex-1"
+                    >
+                      <Button 
+                        variant="secondary" 
+                        className="w-full justify-center rounded-xl" 
+                        icon="open_in_new"
+                      >
+                        Demo
+                      </Button>
+                    </a>
+                  )}
+                </div>
+              ) : project.link ? (
+                project.link.startsWith('http') ? (
+                  <a 
+                    href={project.link} 
+                    target="_blank" 
+                    rel="noopener noreferrer" 
+                    className="w-full"
                   >
-                    EXPLORE_REPORT
-                  </Button>
-                </Link>
+                    <Button 
+                      variant="ghost" 
+                      className="w-full justify-between group/btn border border-outline-variant/20 hover:border-primary/40 rounded-xl" 
+                      icon="arrow_forward"
+                    >
+                      EXPLORE_REPORT
+                    </Button>
+                  </a>
+                ) : (
+                  <Link to={project.link}>
+                    <Button 
+                      variant="ghost" 
+                      className="w-full justify-between group/btn border border-outline-variant/20 hover:border-primary/40 rounded-xl" 
+                      icon="arrow_forward"
+                    >
+                      EXPLORE_REPORT
+                    </Button>
+                  </Link>
+                )
               ) : (
                 <Button 
                   variant="ghost" 

@@ -3,6 +3,57 @@ import { motion, type Variants } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { Button } from '../components';
 
+const HomeLabBanner: React.FC<{ mousePos: { x: number; y: number } }> = ({ mousePos }) => {
+  return (
+    <div className="absolute inset-0 w-full h-full bg-[#0b1326] overflow-hidden flex flex-col items-center justify-center select-none font-mono">
+      {/* Background Dot Grid */}
+      <div 
+        className="absolute inset-0 opacity-40 pointer-events-none" 
+        style={{
+          backgroundImage: 'radial-gradient(rgba(137, 206, 255, 0.15) 1px, transparent 1px)',
+          backgroundSize: '32px 32px'
+        }}
+      />
+      
+      {/* Decorative Cyber Crosshairs */}
+      <div className="absolute inset-0 pointer-events-none">
+        <div className="absolute top-1/2 left-0 w-full h-[1px] bg-[#89ceff]/5" />
+        <div className="absolute top-0 left-1/2 w-[1px] h-full bg-[#89ceff]/5" />
+      </div>
+
+      {/* Content */}
+      <div className="relative z-10 flex flex-col items-center justify-center space-y-8 text-center p-6">
+        {/* Status Indicator */}
+        <div className="flex items-center gap-2 bg-[#1f2a3c] px-4 py-1.5 rounded border border-[#4ae176]/20 shadow-[0_0_20px_rgba(74,225,118,0.15)]">
+          <span className="w-2.5 h-2.5 rounded-full bg-[#4ae176] animate-pulse" />
+          <span className="text-xs font-bold text-[#4ae176] tracking-widest uppercase">system_online</span>
+        </div>
+
+        {/* Glitch Headline with Mouse Parallax */}
+        <div 
+          className="relative transition-transform duration-200 ease-out"
+          style={{ transform: `translate(${mousePos.x}px, ${mousePos.y}px)` }}
+        >
+          <h1 
+            className="text-6xl md:text-8xl font-black text-[#dae2fd] tracking-tighter leading-none italic uppercase relative"
+            style={{
+              textShadow: '0.05em 0 0 rgba(255,0,193,0.75), -0.025em -0.05em 0 rgba(0,255,249,0.75)'
+            }}
+          >
+            HOME LAB
+          </h1>
+        </div>
+      </div>
+
+      {/* Corner Accents */}
+      <div className="absolute top-6 left-6 w-16 h-16 border-t-2 border-l-2 border-[#89ceff]/20" />
+      <div className="absolute top-6 right-6 w-16 h-16 border-t-2 border-r-2 border-[#89ceff]/20" />
+      <div className="absolute bottom-6 left-6 w-16 h-16 border-b-2 border-l-2 border-[#89ceff]/20" />
+      <div className="absolute bottom-6 right-6 w-16 h-16 border-b-2 border-r-2 border-[#89ceff]/20" />
+    </div>
+  );
+};
+
 const SectionHeader: React.FC<{ title: string }> = ({ title }) => {
   return (
     <div className="flex items-center gap-4 mb-12">
@@ -20,13 +71,13 @@ const EpisodeCard: React.FC<{
   title: string;
   date: string;
   description: string;
-  status: 'COMPLETED' | 'IN_PROGRESS' | 'PLANNED';
+  status: 'ACTIVE' | 'STANDBY' | 'DEPLOYED';
   index: number;
 }> = ({ phase, title, date, description, status, index }) => {
   const statusColors = {
-    COMPLETED: 'text-success border-success/20 bg-success/5',
-    IN_PROGRESS: 'text-warning border-warning/20 bg-warning/5',
-    PLANNED: 'text-outline border-outline-variant/20 bg-surface-variant/5'
+    DEPLOYED: 'text-success border-success/20 bg-success/5',
+    ACTIVE: 'text-primary border-primary/20 bg-primary/5',
+    STANDBY: 'text-warning border-warning/20 bg-warning/5'
   };
 
   return (
@@ -73,6 +124,19 @@ const EpisodeCard: React.FC<{
 };
 
 const HomeLabSeries: React.FC = () => {
+  const [mousePos, setMousePos] = React.useState({ x: 0, y: 0 });
+
+  const handleMouseMove = (e: React.MouseEvent) => {
+    const rect = e.currentTarget.getBoundingClientRect();
+    const x = ((e.clientX - rect.left) / rect.width - 0.5) * 30;
+    const y = ((e.clientY - rect.top) / rect.height - 0.5) * 30;
+    setMousePos({ x, y });
+  };
+
+  const handleMouseLeave = () => {
+    setMousePos({ x: 0, y: 0 });
+  };
+
   const containerVariants: Variants = {
     hidden: { opacity: 0 },
     visible: {
@@ -92,32 +156,32 @@ const HomeLabSeries: React.FC = () => {
 
   const episodes = [
     {
-      phase: "Phase 01",
-      title: "Hypervisor & Network Foundations",
-      date: "JAN_2024",
-      description: "Provisioning a Proxmox VE cluster on bare metal. Configuring pfSense as the primary gateway with segmented VLANs for Management, IoT, and Security Lab environments.",
-      status: "COMPLETED" as const
+      phase: "Segment 01",
+      title: "Core Infrastructure & Virtualization",
+      date: "PROXMOX_VE",
+      description: "Provisioning a Proxmox VE 9.1 hypervisor on constrained hardware (Lenovo IdeaPad). Implementing strict memory ballooning strategies to distribute 16GB RAM efficiently across production VMs and LXC containers.",
+      status: "DEPLOYED" as const
     },
     {
-      phase: "Phase 02",
-      title: "SIEM Operations & Log Management",
-      date: "FEB_2024",
-      description: "Deploying the Wazuh manager and ELK stack. Configuring log shippers across Linux and Windows nodes to establish central visibility and detection rules.",
-      status: "COMPLETED" as const
+      phase: "Segment 02",
+      title: "Zero-Trust Mesh Network",
+      date: "TAILSCALE",
+      description: "Implementing a decentralized mesh topology using Tailscale on every virtual node. Enforcing secure HTTPS contexts via MagicDNS and local SSH forwarding, replacing traditional centralized subnet routers.",
+      status: "ACTIVE" as const
     },
     {
-      phase: "Phase 03",
-      title: "Active Directory & Identity Lab",
-      date: "MAR_2024",
-      description: "Setting up a vulnerable Windows Server domain to simulate corporate network attacks. Implementing GPOs for hardening and monitoring AD logs.",
-      status: "IN_PROGRESS" as const
+      phase: "Segment 03",
+      title: "Security & Logging (Wazuh SIEM)",
+      date: "SEC_OPS",
+      description: "Deploying a Wazuh cluster (Manager, Indexer, Dashboard) on a dedicated VM. Monitoring internal traffic and agent logs to establish centralized visibility, often running in standby to manage host resource limits.",
+      status: "STANDBY" as const
     },
     {
-      phase: "Phase 04",
-      title: "Automated Threat Hunting",
-      date: "APR_2024",
-      description: "Developing custom Python scripts and Sigma rules for automated threat hunting against generated telemetry in the ELK environment.",
-      status: "PLANNED" as const
+      phase: "Segment 04",
+      title: "AI Lab & Production Services",
+      date: "APP_LAYER",
+      description: "Hosting the Docker-Prod environment (Nginx Proxy Manager, Password Manager, Calibre-Web) alongside an isolated Debian LXC instance running the Ollama LLM runtime for localized AI processing.",
+      status: "ACTIVE" as const
     }
   ];
 
@@ -143,25 +207,34 @@ const HomeLabSeries: React.FC = () => {
           
           <h1 className="text-4xl md:text-6xl font-bold text-on-surface mb-8 tracking-tight leading-tight">
             Home Lab Deployment <br />
-            <span className="text-primary italic">Continuous Operations</span>
+            <span className="text-primary italic">Proxmox Virtual Kingdom</span>
           </h1>
           
           <p className="text-lg md:text-xl text-on-surface-variant leading-relaxed max-w-3xl">
-            A comprehensive, multi-phase project focused on architecting a production-grade security lab. 
-            From bare-metal hypervisors to advanced SIEM operations, this series documents the evolution 
-            of a private defensive infrastructure.
+            A comprehensive project focused on architecting a self-hosted operations and security lab on constrained hardware. 
+            From hypervisor resource management to zero-trust mesh networking, this documents the live defensive infrastructure.
           </p>
         </motion.div>
       </section>
+
+      {/* Hero Image Preview */}
+      <motion.section 
+        variants={itemVariants}
+        onMouseMove={handleMouseMove}
+        onMouseLeave={handleMouseLeave}
+        className="relative aspect-video w-full overflow-hidden rounded-3xl border border-outline-variant/20 bg-surface-container cursor-crosshair"
+      >
+        <HomeLabBanner mousePos={mousePos} />
+      </motion.section>
 
       {/* Lab Specifications Grid */}
       <motion.section variants={itemVariants}>
         <SectionHeader title="System_Specs" />
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {[
-            { label: 'Hypervisor', value: 'Proxmox VE (Cluster)', icon: 'layers' },
-            { label: 'Gateway', value: 'pfSense (Segmented)', icon: 'router' },
-            { label: 'Monitoring', value: 'Wazuh / ELK Stack', icon: 'monitoring' }
+            { label: 'Hypervisor', value: 'Proxmox VE (rvr-pve)', icon: 'layers' },
+            { label: 'Hardware', value: 'Ryzen 5 / 16GB RAM', icon: 'memory' },
+            { label: 'Network & Security', value: 'Tailscale Mesh / Wazuh', icon: 'security' }
           ].map((spec) => (
             <div key={spec.label} className="p-6 bg-surface-container/30 border border-outline-variant/20 rounded-2xl group hover:border-primary/40 transition-all">
               <span className="material-symbols-outlined text-primary mb-4">{spec.icon}</span>
@@ -174,7 +247,7 @@ const HomeLabSeries: React.FC = () => {
 
       {/* Series Timeline */}
       <section>
-        <SectionHeader title="Series_Timeline" />
+        <SectionHeader title="Infrastructure_Architecture" />
         <div className="max-w-4xl mx-auto">
           {episodes.map((episode, i) => (
             <EpisodeCard key={episode.phase} {...episode} index={i} />
