@@ -1,5 +1,6 @@
 import React from 'react';
 import { Button } from '../components';
+import HomeLabThumbnail from '../components/HomeLabThumbnail';
 import { motion, type Variants } from 'framer-motion';
 import { Link } from 'react-router-dom';
 
@@ -9,18 +10,18 @@ const Dashboard: React.FC = () => {
     visible: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.1, // Reduced from 0.2
+        staggerChildren: 0.1,
       },
     },
   };
 
   const itemVariants: Variants = {
-    hidden: { opacity: 0, y: 15 }, // Smaller offset
+    hidden: { opacity: 0, y: 15 },
     visible: {
       opacity: 1,
       y: 0,
       transition: {
-        duration: 0.4, // Reduced from 0.6
+        duration: 0.4,
         ease: [0.22, 1, 0.36, 1],
       },
     },
@@ -96,14 +97,17 @@ const Dashboard: React.FC = () => {
             color="primary"
             index={0}
             link="/projects/home-lab-series"
+            thumbnail={<HomeLabThumbnail />}
           />
           <FeaturedCard 
-            title="30-Day Cyber Challenge"
-            category="Training"
+            title="OctoSight: Anti-Phishing System"
+            category="Capstone"
             year="2025"
-            description="Consolidated methodology and exploit chains for various CTF machines, focusing on privilege escalation and network defense."
+            description="An end-to-end anti-phishing and fraud detection platform for digital banking, combining rule-based heuristics (35%) and machine learning (65%) with OCR screenshot triage."
             color="secondary"
             index={1}
+            link="/projects/octosight"
+            image="/octosight.webp"
           />
         </div>
       </motion.section>
@@ -119,7 +123,9 @@ const FeaturedCard: React.FC<{
   color: 'primary' | 'secondary';
   index: number;
   link?: string;
-}> = ({ title, category, year, description, color, index, link }) => {
+  image?: string;
+  thumbnail?: React.ReactNode;
+}> = ({ title, category, year, description, color, index, link, image, thumbnail }) => {
   const colorMap = {
     primary: 'text-primary',
     secondary: 'text-secondary',
@@ -135,10 +141,10 @@ const FeaturedCard: React.FC<{
     >
       {link ? (
         <Link to={link}>
-          <CardContent title={title} category={category} year={year} description={description} color={color} colorMap={colorMap} />
+          <CardContent title={title} category={category} year={year} description={description} color={color} colorMap={colorMap} image={image} thumbnail={thumbnail} />
         </Link>
       ) : (
-        <CardContent title={title} category={category} year={year} description={description} color={color} colorMap={colorMap} />
+        <CardContent title={title} category={category} year={year} description={description} color={color} colorMap={colorMap} image={image} thumbnail={thumbnail} />
       )}
     </motion.div>
   );
@@ -151,7 +157,9 @@ const CardContent: React.FC<{
   description: string;
   color: 'primary' | 'secondary';
   colorMap: Record<string, string>;
-}> = ({ title, category, year, description, color, colorMap }) => (
+  image?: string;
+  thumbnail?: React.ReactNode;
+}> = ({ title, category, year, description, color, colorMap, image, thumbnail }) => (
   <>
     <div className="aspect-video mb-8 overflow-hidden rounded-2xl bg-surface-container border border-outline-variant/10 relative">
       <motion.div 
@@ -159,13 +167,25 @@ const CardContent: React.FC<{
         transition={{ duration: 0.6 }}
         className="absolute inset-0"
       >
-        <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent opacity-50" />
-        <div className="absolute inset-0 flex items-center justify-center">
-          <span className={`material-symbols-outlined text-8xl opacity-10 group-hover:opacity-30 transition-all duration-700 group-hover:scale-110 ${colorMap[color]}`}>
-            {color === 'primary' ? 'monitoring' : 'hub'}
-          </span>
-        </div>
-        <div className="w-full h-full bg-surface-bright/10 backdrop-blur-[2px] group-hover:backdrop-blur-0 transition-all duration-700" />
+        {image ? (
+          <img 
+            src={image} 
+            alt={title} 
+            className="w-full h-full object-cover"
+          />
+        ) : thumbnail ? (
+          thumbnail
+        ) : (
+          <>
+            <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent opacity-50" />
+            <div className="absolute inset-0 flex items-center justify-center">
+              <span className={`material-symbols-outlined text-8xl opacity-10 group-hover:opacity-30 transition-all duration-700 group-hover:scale-110 ${colorMap[color]}`}>
+                {color === 'primary' ? 'monitoring' : 'hub'}
+              </span>
+            </div>
+            <div className="absolute inset-0 bg-surface-bright/10 opacity-100 group-hover:opacity-0 transition-opacity duration-700" />
+          </>
+        )}
       </motion.div>
     </div>
     

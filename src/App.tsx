@@ -18,6 +18,7 @@ const Projects = React.lazy(() => import('./pages/Projects'));
 const Articles = React.lazy(() => import('./pages/Articles'));
 const HomeLabSeries = React.lazy(() => import('./pages/HomeLabSeries'));
 const OctoSight = React.lazy(() => import('./pages/OctoSight'));
+const Thrifts = React.lazy(() => import('./pages/Thrifts'));
 
 // Loading Fallback
 const LoadingSector = () => (
@@ -39,6 +40,7 @@ function App() {
             <Route path="projects" element={<Projects />} />
             <Route path="projects/home-lab-series" element={<HomeLabSeries />} />
             <Route path="projects/octosight" element={<OctoSight />} />
+            <Route path="projects/thrifts" element={<Thrifts />} />
             <Route path="articles" element={<Articles />} />
             
             {/* Fallback */}

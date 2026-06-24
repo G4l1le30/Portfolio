@@ -1,20 +1,25 @@
 @import "tailwindcss";
 
 @theme {
-  --color-primary: #ECEAE2; /* Bright accent for active items/buttons */
-  --color-secondary: #C9C8BF;
-  --color-tertiary: #AFACA1;
-  --color-background: #141413; /* BG */
-  --color-surface: #141413;
-  --color-surface-bright: #1c1c1b;
-  --color-surface-container: #1a1a19;
-  --color-surface-container-low: #171716;
-  --color-surface-container-high: #1c1c1b;
-  --color-surface-container-highest: #212120;
-  --color-on-surface: #ECEAE2; /* Heading / Text Primary */
-  --color-on-surface-variant: #C9C8BF; /* Body Text / Text Secondary */
-  --color-outline: #AFACA1; /* Meta Text / Text Muted */
-  --color-outline-variant: #2a2a29;
+  --color-primary: #000000; /* Pure Black — tombol utama, heading, navbar */
+  --color-secondary: #333333; /* Soft Black — tombol hover */
+  --color-tertiary: #6c757d; /* Text Muted — subtitle, deskripsi */
+  --color-background: #FFFFFF; /* Surface White — main background */
+  --color-surface: #FFFFFF; /* Card background */
+  --color-surface-bright: #FAFAFA; /* Off-White — chat bg, input bg */
+  --color-surface-container: #F8F9FA; /* Light Gray — footer bg, tab inactive */
+  --color-surface-container-low: #FAFAFA;
+  --color-surface-container-high: #F8F9FA;
+  --color-surface-container-highest: #ECECEC; /* Border Light */
+  --color-on-surface: #1D1D1F; /* Dark Charcoal — body text */
+  --color-on-surface-variant: #6c757d; /* Secondary text */
+  --color-outline: #adb5bd; /* Meta / disabled text */
+  --color-outline-variant: #E0E0E0; /* Input border */
+  
+  --color-success: #28a745;
+  --color-error: #dc3545;
+  --color-warning: #ffc107;
+  --color-info: #0dcaf0;
   
   --font-mono: "JetBrains Mono", monospace;
   --font-sans: "Inter", sans-serif;
@@ -38,7 +43,7 @@
     font-family: var(--font-mono);
   }
 
-  /* Custom Scrollbar - Elegant Minimal */
+  /* Custom Scrollbar - Minimal Monochrome */
   .custom-scrollbar::-webkit-scrollbar {
     width: 4px;
     height: 4px;
@@ -59,7 +64,7 @@
 
   /* Global Selection */
   ::selection {
-    background: rgba(201, 200, 191, 0.2);
+    background: rgba(0, 0, 0, 0.08);
     color: var(--color-primary);
   }
 }

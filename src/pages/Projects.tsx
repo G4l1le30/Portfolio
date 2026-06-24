@@ -1,5 +1,6 @@
 import React from 'react';
 import { Button, StatusChip } from '../components';
+import HomeLabThumbnail from '../components/HomeLabThumbnail';
 import { motion, type Variants } from 'framer-motion';
 import { Link } from 'react-router-dom';
 
@@ -18,34 +19,20 @@ interface Project {
   image?: string;
 }
 
-const HomeLabThumbnail: React.FC = () => {
-  return (
-    <div className="absolute inset-0 w-full h-full bg-background overflow-hidden flex flex-col items-center justify-center select-none font-mono">
-      {/* Decorative Cyber Crosshairs (Muted) */}
-      <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute top-1/2 left-0 w-full h-[1px] bg-primary/5" />
-        <div className="absolute top-0 left-1/2 w-[1px] h-full bg-primary/5" />
-      </div>
 
-      {/* Content */}
-      <div className="relative z-10 flex flex-col items-center justify-center space-y-6 text-center">
-        <div className="relative group/glitch">
-          <h1 className="text-4xl md:text-5xl font-black text-primary tracking-tighter leading-none italic uppercase relative">
-            HOME LAB
-          </h1>
-        </div>
-      </div>
-
-      {/* Corner Accents */}
-      <div className="absolute top-4 left-4 w-10 h-10 border-t border-l border-primary/20" />
-      <div className="absolute top-4 right-4 w-10 h-10 border-t border-r border-primary/20" />
-      <div className="absolute bottom-4 left-4 w-10 h-10 border-b border-l border-primary/20" />
-      <div className="absolute bottom-4 right-4 w-10 h-10 border-b border-r border-primary/20" />
-    </div>
-  );
-};
 
 const PROJECTS: Project[] = [
+  {
+    id: 'ECOM-01',
+    title: 'Thrifts',
+    category: 'Web Development',
+    description: 'A full-featured thrift store e-commerce platform with real-time chat, seller dashboard, wishlist, internal balance checkout, and image upload — built from scratch with Node.js, Express 5, and MySQL.',
+    tags: ['Node.js', 'Express', 'MySQL', 'Socket.IO'],
+    status: 'LIVE',
+    statusVariant: 'success',
+    link: '/projects/thrifts',
+    image: '/thrifts.webp',
+  },
   {
     id: 'LAB-01',
     title: 'Home Lab Deployment (Series)',
@@ -196,10 +183,9 @@ const Projects: React.FC = () => {
                         {['database', 'security', 'terminal', 'hub', 'biotech', 'cloud'][i % 6]}
                       </span>
                     </div>
+                    <div className="absolute inset-0 bg-surface-bright/10 opacity-100 group-hover:opacity-0 transition-opacity duration-700" />
                   </>
                 )}
-                {/* Replaced backdrop-blur with simple opacity transition */}
-                <div className="absolute inset-0 bg-surface-bright/10 opacity-100 group-hover:opacity-0 transition-opacity duration-700" />
               </motion.div>
               
               <div className="absolute top-4 right-4 px-2 py-1 bg-background/80 backdrop-blur-md border border-outline-variant/30 rounded font-mono text-[9px] text-primary tracking-tighter">
